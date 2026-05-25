@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Judul ini akan muncul di tab browser & preview link -->
+  <title>💌 Untuk Kamu, Cintaku</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', serif;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow-x: hidden;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 40px 30px;
+      max-width: 600px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+      margin: 30px 0;
+    }
+    h1 {
+      font-size: 2.5em;
+      color: #ad1457;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      font-style: italic;
+      color: #880e4f;
+      margin-bottom: 30px;
+      font-size: 1.2em;
+    }
+    .letter {
+      text-align: left;
+      line-height: 1.8;
+      color: #4a1528;
+      font-size: 1.05em;
+      margin-bottom: 30px;
+      border-left: 4px solid #f06292;
+      padding: 20px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 0 15px 15px 0;
+    }
+    .letter p { margin-bottom: 15px; }
+    .signature {
+      text-align: right;
+      font-style: italic;
+      font-weight: bold;
+      color: #ad1457;
+      margin-top: 20px;
+    }
+    .button {
+      background: #e91e63;
+      color: white;
+      border: none;
+      padding: 14px 35px;
+      font-size: 1.1em;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      margin: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .button:hover {
+      background: #ad1457;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(233,30,99,0.4);
+    }
+    .photo-grid {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 25px 0 15px;
+    }
+    .photo-grid img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 15px;
+      box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .photo-grid img:hover { transform: scale(1.08); }
+    .hearts {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      color: #f06292;
+      font-size: 24px;
+      animation: float 6s ease-in infinite;
+      opacity: 0.7;
+    }
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.7; }
+      90% { opacity: 0.7; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+    @media (max-width: 500px) {
+      h1 { font-size: 2em; }
+      .photo-grid img { width: 100px; height: 100px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts" id="heartsContainer"></div>
+
+  <div class="container">
+    <h1>💌 Untukmu, Cintaku</h1>
+    <p class="subtitle">Sebuah halaman kecil dari hati yang paling dalam</p>
+
+    <!-- 🖊️ UBAH SURAT DI SINI -->
+    <div class="letter">
+      <p>Sayangku,</p>
+      <p>Malam ini aku ingin menulis sesuatu yang sederhana tapi tulus. Setiap memikirkanmu, rasanya seperti ada melodi lembut yang berputar di kepala. Kamu adalah bagian terbaik dari hari-hariku, alasan aku tersenyum tanpa sebab, dan tempat ternyaman untuk pulang.</p>
+      <p>Terima kasih sudah menjadi kamu. Aku mencintaimu, bukan hanya karena kamu luar biasa, tapi karena bersamamu, aku merasa menjadi versi terbaik dari diriku sendiri.</p>
+      <p class="signature">Selamanya milikmu,<br>[Nama Kamu]</p>
+    </div>
+
+    <!-- 🖼️ GANTI FOTO: ganti src dengan link foto kalian -->
+    <div class="photo-grid">
+      <img src="https://picsum.photos/id/1015/300/300" alt="Kenangan 1">
+      <img src="https://picsum.photos/id/1043/300/300" alt="Kenangan 2">
+      <img src="https://picsum.photos/id/106/300/300" alt="Kenangan 3">
+    </div>
+
+    <!-- 🎵 TOMBOL: ganti link di JavaScript nanti -->
+    <a href="#" class="button" id="playButton">🎵 Putar Lagu Kita</a>
+    <p style="margin-top:20px; font-size:0.9em; color:#ad1457;">(Klik untuk kejutan kecil)</p>
+  </div>
+
+  <script>
+    // Hati mengambang
+    function createHearts() {
+      const container = document.getElementById('heartsContainer');
+      for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.innerHTML = ['❤️','💕','💗','💖','💘'][Math.floor(Math.random()*5)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        heart.style.animationDelay = Math.random() * 5 + 's';
+        heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        container.appendChild(heart);
+      }
+    }
+    createHearts();
+
+    // 🎧 GANTI LINK LAGU DI SINI:
+    const musicLink = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M'; // Ganti dengan playlist atau lagu pilihanmu
+    document.getElementById('playButton').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open(musicLink, '_blank');
+      alert('🎶 Dengarkan ya… lagu ini selalu mengingatkanku padamu.');
+    });
+  </script>
+</body>
+</html>
